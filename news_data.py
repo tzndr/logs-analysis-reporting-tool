@@ -56,7 +56,7 @@ def high_errors():
         row = cursor.fetchone()
     db.close()
 
-
+# Printing all results in reader-friendly format
 print('\n''\n'' The Top 3 Articles of All Time are:''\n')
 top_three_stories()
 print('\n''\n''\n'' The Most Popular Authors of All Time are:''\n')
