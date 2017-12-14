@@ -1,4 +1,4 @@
-#!usr/bin/python3
+#!usr/bin/env python
 
 import psycopg2
 
@@ -55,6 +55,6 @@ print('\n''\n'' The Top 3 Articles of All Time are:''\n')
 top_three_stories()
 print('\n''\n''\n'' The Most Popular Authors of All Time are:''\n')
 top_authors()
-print('\n''\n''\n'' Days in which More than 1% of Requests Led to Errors:''\n')
+print('\n''\n''\n'' The Days in which More than 1% of Requests Led to Errors:''\n')
 high_errors()
-print('\n''\n')
+print('\n''\n'' End of Report''\n')
