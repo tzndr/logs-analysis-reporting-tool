@@ -12,7 +12,12 @@ def top_three_stories():
                    GROUP BY title
                    ORDER BY views desc limit 3;"""
                    )
-    print(cursor.fetchall())
+    row_1 = cursor.fetchone()
+    row_2 = cursor.fetchone()
+    row_3 = cursor.fetchone()
+    print(' {} - {} views '.format(row_1[0], row_1[1]))
+    print(' {} - {} views '.format(row_2[0], row_2[1]))
+    print(' {} - {} views '.format(row_3[0], row_3[1]))
     db.close()
 
 #Fetching results that display the top 3 authors of all time
@@ -25,7 +30,10 @@ def top_authors():
                      GROUP BY name
                      ORDER BY views desc;"""
                    )
-    print(cursor.fetchall())
+    row = cursor.fetchone()
+    while row != None:
+        print(' {} - {} views '.format(row[0], row[1]))
+        row = cursor.fetchone()
     db.close()
 
 #Fetching results to display which days had more than 1% of requests leading to errors
@@ -35,9 +43,16 @@ def high_errors():
     cursor.execute( """SELECT *
                          FROM errorlog where "%" > 1;"""
                    )
-    print(cursor.fetchall())
+    row = cursor.fetchone()
+    while row != None:
+        print(" {} - {}% errors".format(row[0], row[1]))
+        row = cursor.fetchone()
     db.close()
 
+print('\n''\n'' The Top 3 Articles of All Time are:''\n')
 top_three_stories()
+print('\n''\n''\n'' The Most Popular Authors of All Time are:''\n')
 top_authors()
+print('\n''\n''\n'' Days in which More than 1% of Requests Led to Errors:''\n')
 high_errors()
+print('\n''\n')
