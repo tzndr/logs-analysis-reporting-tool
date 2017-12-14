@@ -28,8 +28,12 @@ def top_authors():
     print(cursor.fetchall())
     db.close()
 
-
-
-#Query for 3rd problem
-SELECT *
-  FROM errorlog where "%" > 1;
+#Fetching results to display which days had more than 1% of requests leading to errors
+def high_errors():
+    db = psychopg2.Connect(database = DBNAME)
+    cursor = db.cursor()
+    cursor.execute( "  SELECT *
+                       FROM errorlog where "%" > 1;"
+                   )
+    print(cursor.fetchall())
+    db.close()
