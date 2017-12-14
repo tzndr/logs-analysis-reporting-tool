@@ -1,10 +1,17 @@
 #Query for 1st problem
-select title, count(title) as views from articles, log where concat('/article/', articles.slug)
-= log.path group by title order by views desc limit 3;
+   SELECT title, COUNT(title) AS views
+     FROM articles, log
+    WHERE concat('/article/', articles.slug) = log.path
+ GROUP BY title
+ ORDER views desc limit 3;
 
 #Query for 2nd problem
-select name, count(path) as views from authors, articles, log where authors.id = articles.author
-and concat('/article/', articles.slug) = log.path group by name order by views desc;
+  SELECT name, COUNT(path) AS views
+    FROM authors, articles, log where authors.id = articles.author
+         AND concat('/article/', articles.slug) = log.path
+GROUP BY name
+ORDER BY views desc;
 
 #Query for 3rd problem
-select * from errorlog where "%" > 1.0;
+SELECT *
+  FROM errorlog where "%" > 1;
