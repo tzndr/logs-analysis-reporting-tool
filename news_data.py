@@ -2,7 +2,7 @@ import psychopg2
 
 DBNAME = 'newsdata.sql'
 
-#Fetching results for question 1
+#Fetching results that display the most popular 3 articles of all time
 def top_three_stories():
     db = psychopg2.Connect(database = DBNAME)
     cursor = db.cursor()
@@ -15,13 +15,20 @@ def top_three_stories():
     print(cursor.fetchall())
     db.close()
 
+#Fetching results that display the top 3 authors of all time
+def top_authors():
+    db = psychopg2.Connect(database = DBNAME)
+    cursor = db.cursor()
+    cursor.execute( "  SELECT name, COUNT(path) AS views
+                         FROM authors, articles, log where authors.id = articles.author
+                          AND concat('/article/', articles.slug) = log.path
+                     GROUP BY name
+                     ORDER BY views desc;"
+                   )
+    print(cursor.fetchall())
+    db.close()
 
-#Query for 2nd problem
-  SELECT name, COUNT(path) AS views
-    FROM authors, articles, log where authors.id = articles.author
-         AND concat('/article/', articles.slug) = log.path
-GROUP BY name
-ORDER BY views desc;
+
 
 #Query for 3rd problem
 SELECT *
