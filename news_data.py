@@ -1,10 +1,10 @@
 import psycopg2
 
-DBNAME = 'newsdata.sql'
+DBNAME = 'news'
 
 #Fetching results that display the most popular 3 articles of all time
 def top_three_stories():
-    db = psycopg2.Connect(database = DBNAME)
+    db = psycopg2.connect(database = DBNAME)
     cursor = db.cursor()
     cursor.execute( """SELECT title, COUNT(title) AS views
                        FROM articles, log
@@ -17,7 +17,7 @@ def top_three_stories():
 
 #Fetching results that display the top 3 authors of all time
 def top_authors():
-    db = psycopg2.Connect(database = DBNAME)
+    db = psycopg2.connect(database = DBNAME)
     cursor = db.cursor()
     cursor.execute( """SELECT name, COUNT(path) AS views
                          FROM authors, articles, log where authors.id = articles.author
@@ -30,7 +30,7 @@ def top_authors():
 
 #Fetching results to display which days had more than 1% of requests leading to errors
 def high_errors():
-    db = psycopg2.Connect(database = DBNAME)
+    db = psycopg2.connect(database = DBNAME)
     cursor = db.cursor()
     cursor.execute( """SELECT *
                          FROM errorlog where "%" > 1;"""
