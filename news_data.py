@@ -46,10 +46,10 @@ def high_errors():
     """Fetching results to display which days had more than 1% of requests
         leading to errors"""
     query = """SELECT *
-                 FROM errorlog where "%" > 1;"""
+                 FROM errorlog where percent > 1;"""
     results = execute_query(query)
-    for result in results:
-        print(" {} - {}% errors".format(result[0], result[1]))
+    for day, percent in results:
+        print(" {} - {}% errors".format(day, percent))
 
 
 def main():
