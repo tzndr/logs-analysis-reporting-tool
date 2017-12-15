@@ -7,7 +7,7 @@ A Python program using PostgreSQL to query a news site database for specific res
    (containing over a million rows of data through 3 multi-columned tables) and returns the results in
    a reader-friendly format with sorted data. It answers "What are the three most popular articles of all time and how many views has each received?", Who are the most popular authors of all time and how many views has each received?", and "On which days did more than 1% of requests lead to errors and what was the percentage?". Each query is dynamic in that they require the joining of tables or the use of views to return complex answers from many different units of data within the database.</p>
 
-   <h1>Running the Program</h1>
+<h1>Running the Program</h1>
    <ol>
    <li>Download and install <a href='https://www.virtualbox.org/'>Virtual Box</a>
    <li>Downlaod and install <a href='https://www.vagrantup.com/downloads.html'>Vagrant</a>
@@ -24,26 +24,27 @@ A Python program using PostgreSQL to query a news site database for specific res
 <h1>Required Views</h1>
 <h4>errorview:</h4>
 <p><code>CREATE VIEW errorview AS
-         SELECT to_char(time, 'Mon DD, YYYY') AS day, COUNT(status) AS errors
+         SELECT time::date AS day, COUNT(status) AS errors
          FROM log
          WHERE status != '200 OK'
-         GROUP BY 1
+         GROUP BY day
          ORDER BY day;
    </code>
 
 <h4>totalview:</h4>
 <p><code>CREATE VIEW totalview AS    
-         SELECT to_char(time, 'Mon DD, YYYY') AS day, COUNT(status) AS total
+         SELECT time::date AS day, COUNT(status) AS total
          FROM log
-         GROUP BY 1
+         GROUP BY day
          ORDER BY day;
    </code>
 
 <h4>errorlog:</h4>
 <p><code>CREATE VIEW errorlog AS    
-         SELECT (errorview.day), round(((errorview.errors*1.00)/(totalview.total)*100), 2) AS "%"
+         SELECT (to_char(errorview.day, 'Mon DD, YYYY'), round(((errorview.errors*1.00)/(totalview.total)*100), 2)
+         AS percent
          FROM errorview
          JOIN totalview
          ON errorview.day = totalview.day
-         ORDER BY "%" desc;
+         ORDER BY percent desc;
    </code>
