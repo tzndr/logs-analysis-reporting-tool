@@ -40,7 +40,8 @@ A Python program using PostgreSQL to query a news site database for specific res
    
 <h4>errorlog:</h4>
 <p><code>    SELECT (errorview.day), round(((errorview.errors *1.00)/(totalview.total)*100), 2) AS "%"
-               FROM errorview join totalview 
+               FROM errorview 
+               JOIN totalview 
                  ON errorview.day = totalview.day
            ORDER BY "%" desc;
    </code>
