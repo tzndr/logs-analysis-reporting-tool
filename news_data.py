@@ -33,11 +33,11 @@ def top_authors():
                     GROUP BY name
                     ORDER BY views desc;"""
                    )
-    row = cursor.fetchone()
-    while row is not None:
-        print(' {} - {} views '.format(row[0], row[1]))
-        row = cursor.fetchone()
+    results = cursor.fetchall()
     db.close()
+    for name, views in results:
+        print(' {} - {} views '.format(name, views))
+
 
 
 def high_errors():
@@ -48,15 +48,15 @@ def high_errors():
     cursor.execute("""SELECT *
                         FROM errorlog where "%" > 1;"""
                    )
-    row = cursor.fetchone()
-    while row is not None:
-        print(" {} - {}% errors".format(row[0], row[1]))
-        row = cursor.fetchone()
+    results = cursor.fetchall()
     db.close()
+    for result in results:
+        print(" {} - {}% errors".format(result[0], result[1]))
+
 
 
 def main():
-    """Printing all results in reader-friendly format"""
+    """Running queries and printing all results in reader-friendly format"""
     print('\n''\n'' The Top 3 Articles of All Time are:''\n')
     top_three_stories()
     print('\n''\n''\n'' The Most Popular Authors of All Time are:''\n')
