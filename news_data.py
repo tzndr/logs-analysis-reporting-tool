@@ -65,3 +65,6 @@ def main():
           'to Errors:''\n')
     high_errors()
     print('\n''\n'' End of Report''\n')
+
+if __name__ == '__main__':
+    main()
