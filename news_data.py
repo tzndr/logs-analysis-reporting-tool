@@ -15,13 +15,11 @@ def top_three_stories():
                     GROUP BY title
                     ORDER BY views desc limit 3;"""
                    )
-    row_1 = cursor.fetchone()
-    row_2 = cursor.fetchone()
-    row_3 = cursor.fetchone()
-    print(' {} - {} views '.format(row_1[0], row_1[1]))
-    print(' {} - {} views '.format(row_2[0], row_2[1]))
-    print(' {} - {} views '.format(row_3[0], row_3[1]))
+    results = cursor.fetchall()
     db.close()
+    for row in results:
+        print(' {} - {} views '.format(results[0], results[1]))
+
 
 
 def top_authors():
@@ -57,7 +55,7 @@ def high_errors():
     db.close()
 
 
-def print_results():
+def main():
     """Printing all results in reader-friendly format"""
     print('\n''\n'' The Top 3 Articles of All Time are:''\n')
     top_three_stories()
