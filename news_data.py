@@ -17,8 +17,8 @@ def top_three_stories():
                    )
     results = cursor.fetchall()
     db.close()
-    for row in results:
-        print(' {} - {} views '.format(results[0], results[1]))
+    for title, views in results:
+        print(' {} - {} views '.format(title, views))
 
 
 
