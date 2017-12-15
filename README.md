@@ -13,7 +13,7 @@ A Python program using PostgreSQL to query a news site database for specific res
    <li>Download and install <a href='https://www.virtualbox.org/'>Virtual Box</a>
    <li>Downlaod and install <a href='https://www.vagrantup.com/downloads.html'>Vagrant</a>
    <li>Clone this repository and place <code>news_data.py</code> inside your vagrant directory
-   <li>Download the <a href='https://goo.gl/6h4bJE'>Newsdata Database</a> and place newsdata.sql inside your Vagrant directory
+   <li>Download the <a href='http://bit.ly/2y4PPQy'>Newsdata Database</a> and place newsdata.sql inside your Vagrant directory
    <li>Navigate <code>cd</code> to your Vagrant directory within your terminal 
    <li>Execute the command <code>vagrant up</code>
    <li>Follow with the command <code>vagrant ssh</code>
