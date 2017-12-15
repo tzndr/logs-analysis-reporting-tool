@@ -1,12 +1,12 @@
-#!usr/bin/env python
+#!/usr/bin/env python
 
 import psycopg2
 
 DBNAME = 'news'
 
 
-# Fetching results that display the most popular 3 articles of all time
 def top_three_stories():
+    """Fetching results that display the most popular 3 articles of all time"""
     db = psycopg2.connect(database=DBNAME)
     cursor = db.cursor()
     cursor.execute("""SELECT title, COUNT(title) AS views
@@ -24,8 +24,8 @@ def top_three_stories():
     db.close()
 
 
-# Fetching results that display the top 3 authors of all time
 def top_authors():
+    """Fetching results that display the top 3 authors of all time"""
     db = psycopg2.connect(database=DBNAME)
     cursor = db.cursor()
     cursor.execute("""SELECT name, COUNT(path) AS views
@@ -42,9 +42,9 @@ def top_authors():
     db.close()
 
 
-# Fetching results to display which days had more than 1% of requests
-# leading to errors
 def high_errors():
+    """Fetching results to display which days had more than 1% of requests
+        leading to errors"""
     db = psycopg2.connect(database=DBNAME)
     cursor = db.cursor()
     cursor.execute("""SELECT *
@@ -57,12 +57,13 @@ def high_errors():
     db.close()
 
 
-# Printing all results in reader-friendly format
-print('\n''\n'' The Top 3 Articles of All Time are:''\n')
-top_three_stories()
-print('\n''\n''\n'' The Most Popular Authors of All Time are:''\n')
-top_authors()
-print('\n''\n''\n'' The Days in which More than 1% of Requests Led '
-      'to Errors:''\n')
-high_errors()
-print('\n''\n'' End of Report''\n')
+def print_results():
+    """Printing all results in reader-friendly format"""
+    print('\n''\n'' The Top 3 Articles of All Time are:''\n')
+    top_three_stories()
+    print('\n''\n''\n'' The Most Popular Authors of All Time are:''\n')
+    top_authors()
+    print('\n''\n''\n'' The Days in which More than 1% of Requests Led '
+          'to Errors:''\n')
+    high_errors()
+    print('\n''\n'' End of Report''\n')
