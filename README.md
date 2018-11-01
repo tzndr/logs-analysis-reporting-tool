@@ -41,7 +41,7 @@ A Python program using PostgreSQL to query a news site database for specific res
 
 <h4>errorlog:</h4>
 <p><code>CREATE VIEW errorlog AS    
-         SELECT (to_char(errorview.day, 'Mon DD, YYYY'), round(((errorview.errors*1.00)/(totalview.total)*100), 2)
+         SELECT (to_char(errorview.day, 'Mon DD, YYYY')), round(((errorview.errors*1.00)/(totalview.total)*100), 2)
          AS percent
          FROM errorview
          JOIN totalview
