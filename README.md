@@ -18,6 +18,7 @@ A Python program using PostgreSQL to query a news site database for specific res
    <li>Follow with the command <code>vagrant ssh</code>
    <li>Import the news database by running <code>psql -d news -f newsdata.sql</code>
    <li>Access the database with <code>psql news</code> and create the required SQL views (see below)
+   <li>Exit the database with <code>\q</code>
    <li>Run the program <code>python news_data.py</code>
    </ol>
 
